@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" sizes="32x32" href="./image/computer.png" />  
-  <title>개발 연습장</title>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+  <title>BSH's LAB</title>
   <style>
     * {
       box-sizing: border-box;
@@ -15,6 +16,7 @@
       color: #333;
       margin: 0;
       padding: 0;
+      font-family: 'Gowun Dodum', sans-serif;
     }
 
     header {
@@ -36,8 +38,6 @@
       background: #fff;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-
-      /* ✅ 전체 페이드 인 애니메이션 */
       opacity: 0;
       transform: translateY(20px);
       animation: fadeSlideIn 0.6s ease-out forwards;
@@ -54,15 +54,52 @@
       margin-bottom: 30px;
     }
 
+    .program-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
     .program h2 {
-      margin-bottom: 8px;
+      margin: 0;
       font-size: 1.2em;
     }
 
+    .toggle-btn {
+      background: none;
+      border: none;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle-btn.rotate {
+      transform: rotate(180deg);
+    }
+
     .program p {
-      margin-bottom: 10px;
+      margin: 8px 0;
       color: #555;
     }
+
+    .extra-desc {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 10px;
+  margin-top: 0;
+  background-color: #f9fafc;
+  border-left: 4px solid #007bff;
+  border-radius: 6px;
+  color: #444;
+  transition: max-height 0.4s ease, margin-top 0.4s ease, padding 0.4s ease;
+}
+
+.extra-desc.show {
+  max-height: 500px;  /* 충분히 큰 값 */
+  padding: 10px;
+  margin-top: 10px;
+}
+
 
     .program a {
       display: inline-block;
@@ -73,6 +110,7 @@
       border-radius: 6px;
       transition: all 0.3s ease;
       box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3);
+      margin-top: 8px;
     }
 
     .program a:hover {
@@ -82,13 +120,19 @@
     }
 
     footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #222;
       text-align: center;
       padding: 20px;
       font-size: 0.9em;
-      color: #888;
+      color: white;
+      border-top: 1px solid #ddd;
+      z-index: 1000;
     }
 
-    /* 📱 모바일 대응 */
     @media (max-width: 600px) {
       header h1 {
         font-size: 1.5em;
@@ -114,7 +158,9 @@
 <body>
 
   <header>
-    <h1>💻 개발 연습장</h1>
+    <h1>
+    	<img src="./image/dev_logo.png" alt="컴퓨터 아이콘" style="width:160px; height:70px; vertical-align:middle;" />
+    </h1>
     <p>만들고 싶은 걸 자유롭게 만들어보는 개발 공간</p>
   </header>
 
@@ -122,22 +168,51 @@
 
     <!-- 프로그램 1 -->
     <div class="program">
-      <h2>🔍 PC정보조회</h2>
+      <div class="program-header">
+        <h2>🔍 PC정보조회</h2>
+        <button class="toggle-btn" onclick="toggleExtra(this)">▼</button>
+      </div>
       <p>포맷 전에 꼭 확인해야 할 정보를 한눈에 보여주는 도구입니다.</p>
       <a href="https://byeonsunghyun.github.io/devtest/downloads/PC정보조회.exe" download>📥 다운로드</a>
+      <div class="extra-desc">
+        🔧 <strong>버전</strong><br />
+        Version : 1.0.0
+      </div>
     </div>
 
+    <!-- 프로그램 2 -->
     <div class="program">
-      <h2>🖱️ 자동 클릭 매크로</h2>
+      <div class="program-header">
+        <h2>🖱️ 자동 클릭 매크로</h2>
+        <button class="toggle-btn" onclick="toggleExtra(this)">▼</button>
+      </div>
       <p>마우스를 반복적으로 클릭해야 하는 작업을 자동으로 수행해 주는 도구입니다.</p>
       <a href="https://drive.google.com/file/d/1aTCGIKo__Uo8fizXZhRYg6x5MFH4FqNk/view" download>📥 다운로드</a>
+      <div class="extra-desc">
+        🔧 <strong>버전</strong><br />
+       Version : 1.0.0
+      </div>
     </div>
+    
+    
 
   </div>
 
   <footer>
-    © 2025 Byeon Sung Hyun. All rights reserved.
-  </footer>
+  © 2025 Byeon Sung Hyun. All rights reserved.
+  <a href="https://byeonsunghyun.github.io/bsh_hub/bshhub" title="사이트 방문" style="display: inline-block;">
+    <img src="./image/hub_logo.png" alt="컴퓨터 아이콘" style="width:20px; height:20px; vertical-align:middle; margin-left:5px; margin-bottom:2px; cursor:pointer;" />
+  </a>
+</footer>
+
+
+  <script>
+    function toggleExtra(btn) {
+      const desc = btn.closest('.program').querySelector('.extra-desc');
+      desc.classList.toggle('show');
+      btn.classList.toggle('rotate');
+    }
+  </script>
 
 </body>
 </html>
